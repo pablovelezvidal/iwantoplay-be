@@ -6,6 +6,7 @@ import * as os from 'os';
 import cookieParser from 'cookie-parser';
 import swaggerify from './swagger';
 import l from './logger';
+import mongoose  from 'mongoose';
 
 const app = new Express();
 
@@ -17,6 +18,17 @@ export default class ExpressServer {
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(cookieParser(process.env.SESSION_SECRET));
     app.use(Express.static(`${root}/public`));
+
+
+    mongoose.connect('mongodb://127.0.0.1:27017/iwtp_config'); // connect to our database
+    // Handle the connection event
+    var db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'connection error:'));
+    
+    db.once('open', function() {
+      console.log("DB connection alive");
+    });
+
   }
 
   router(routes) {
@@ -29,4 +41,5 @@ export default class ExpressServer {
     http.createServer(app).listen(port, welcome(port));
     return app;
   }
+
 }

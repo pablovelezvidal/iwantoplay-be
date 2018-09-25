@@ -17,55 +17,55 @@ produces:
 
 
 definitions:
-  ExampleBody:
+  CityBody:
     type: object
-    title: example
+    title: city
     required:
       - name
     properties:
       name:
         type: string
-        example: no_stress
+        example: Cali
 
 paths:
-  /examples:
+  /cities:
     get:
       tags:
-        - Examples
-      description: Fetch all examples
+        - Cities
+      description: Fetch all cities
       responses:
         200:
-          description: Returns all examples
+          description: Returns all cities
     post:
       tags:
-        - Examples
-      description: Create a new example
+        - Cities
+      description: Create a new city
       parameters:
-        - name: example
+        - name: city
           in: body
-          description: an example
+          description: a city
           required: true
           schema: 
-            $ref: "#/definitions/ExampleBody"
+            $ref: "#/definitions/CityBody"
       responses:
         200:
-          description: Returns all examples
+          description: Returns all cities
 
-  /examples/{id}:
+  /cities/{id}:
     get:
       tags:
-        - Examples
+        - Cities
       parameters:
         - name: id
           in: path
           required: true
-          description: The id of the example to retrieve
-          type: integer
+          description: The id of the city to retrieve
+          type: string
       responses:
         200:
-          description: Return the example with the specified id
+          description: Return the city with the specified id
         404:
-          description: Example not found
+          description: City not found
 
   /spec:
     get:
