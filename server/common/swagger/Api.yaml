@@ -26,7 +26,15 @@ definitions:
       name:
         type: string
         example: Cali
-
+  SportBody:
+    type: object
+    title: city
+    required:
+      - name
+    properties:
+      name:
+        type: string
+        example: Futbol
 paths:
   /cities:
     get:
@@ -66,6 +74,29 @@ paths:
           description: Return the city with the specified id
         404:
           description: City not found
+
+  /sports:
+    get:
+      tags:
+        - Sports
+      description: Fetch all sports
+      responses:
+        200:
+          description: Returns all sports
+    post:
+      tags:
+        - Sports
+      description: Create a new sport
+      parameters:
+        - name: sport
+          in: body
+          description: a sport
+          required: true
+          schema: 
+            $ref: "#/definitions/SportBody"
+      responses:
+        200:
+          description: Returns all sports
 
   /spec:
     get:
