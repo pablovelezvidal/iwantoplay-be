@@ -1,11 +1,10 @@
-var express = require('express');
-var router = express.Router();
-var cityController = require('../controllers/cityController.js');
+const express = require('express');
 
-router.use(function(req, res, next) {
-    // do logging
-    console.log('Something is happening.');
-    next(); // make sure we go to the next routes and don't stop here
+const router = express.Router();
+const cityController = require('../controllers/cityController.js');
+
+router.use((req, res, next) => {
+  next(); // make sure we go to the next routes and don't stop here
 });
 
 /*
