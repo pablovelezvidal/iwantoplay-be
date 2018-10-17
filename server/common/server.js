@@ -5,6 +5,7 @@ import * as http from 'http';
 import * as os from 'os';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import swaggerify from './swagger';
 import l from './logger';
 
@@ -18,6 +19,7 @@ export default class ExpressServer {
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(cookieParser(process.env.SESSION_SECRET));
     app.use(Express.static(`${root}/public`));
+    app.use(cors());
 
 
     mongoose.connect('mongodb://127.0.0.1:27017/iwtp'); // connect to our database
